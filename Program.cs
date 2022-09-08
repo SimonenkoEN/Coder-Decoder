@@ -2,12 +2,12 @@
 
 #pragma warning restore format
 
-string[] arrSymbol = { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9",
+string[] arrSymbol = { " ", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9",
                       "А", "Б", "В", "Г", "Д", "Е", "Ж", "З", "И", "Й",
                       "К", "Л",  "М", "Н", "О", "П", "Р", "С", "Т", "У",
                       "Ф", "Х",  "Ц", "Ч", "Ш","Щ", "Ъ",  "Ы", "Ь", "Э",
                       "Ю", "Я"};
-string[] arrMorse = { "-----", ".----", "..---", "...--", "....-", ".....", "-....", "--...", "---..", "----.",
+string[] arrMorse = { " ", "-----", ".----", "..---", "...--", "....-", ".....", "-....", "--...", "---..", "----.",
                       ".-", "-...", ".--", "--.", "-..", ".", "...-", "--..", "..", ".---",
                       "-.-", ".-..",  "--", "-.", "---", ".--.", ".-.", "...", "-", "..-",
                       "..-.", "....",  "-.-.", "---.", "----","--.-", ".--.-",  "-.--", "-..-", "..-..",
@@ -32,10 +32,6 @@ switch(mode)
     default :
         return;
 }
-
-// Console.WriteLine(MorseDecoder("-.. . -.- --- -.. . .-.   -- --- .-. --.. ."));
-// string str = Console.ReadLine();
-// Console.WriteLine(MorseDecoder(str));
 
 string MorseDecoder(string morseString)
 {
@@ -83,23 +79,12 @@ string GetSymbol(string morseSymbol)
 string MorseCoder(string symbolString)
 {
     string codeString = string.Empty;
-    string[] wordsArray = symbolString.Split(" ");
-    for (int i = 0; i < wordsArray.Length; i++)
+    char[] symbolArray = symbolString.ToCharArray();
+    for (int i = 0; i < symbolArray.Length; i++)
     {
-        codeString += GetMorseWord(wordsArray[i]) + "  ";
+        codeString += GetMorseSymbol(symbolArray[i]);
     }
     return codeString;
-}
-
-string GetMorseWord(string word)
-{
-    string outWord = string.Empty;
-    char[] wordArray = word.ToCharArray();
-    for (int i = 0; i < wordArray.Length; i++)
-    {
-        outWord += GetMorseSymbol(wordArray[i]) + " ";
-    }
-    return outWord;
 }
 
 string GetMorseSymbol(char symbol)
@@ -112,7 +97,7 @@ string GetMorseSymbol(char symbol)
          if (arrSymbol[i] == inSymbol)
         {
             index = i;
-            outSymbol = arrMorse[index];
+            outSymbol = arrMorse[index] + " ";
             break;
         } 
         else
